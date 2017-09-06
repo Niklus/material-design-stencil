@@ -1,6 +1,6 @@
 import { Component, Prop,  Element} from '@stencil/core';
 import { MDCTemporaryDrawer } from '@material/drawer';
-// import { MDCToolbar } from '@material/toolbar';
+import { MDCSimpleMenu } from '@material/menu';
 
 @Component({
   tag: 'app-nav',
@@ -11,22 +11,27 @@ export class AppNav {
 
   @Element() element: HTMLElement;
 
-  @Prop() list:Array<string> = ['Home','About','Contact'];
+  @Prop() list:Array<string> = ['View1','View2','View3'];
 
-  appDrawer: {open: boolean};
+  appDrawer: {open: boolean}; // placeholder object to avoid type errors in toggledrawer method.
   
   componentDidLoad(){
     
-    // This styles need to be added dynamically since <a> tag is hidden in stencil-rout-link
+    // This styles need to be added dynamically since <a> tag is hidden in <stencil-rout-link/>
     const links:any = this.element.querySelectorAll('#link a')
     links.forEach( link => link.classList.add("mdc-list-item"));
     
     // Initialise Temporary Drawer
-    let appNav = this.element.querySelector('.mdc-temporary-drawer');
-    this.appDrawer = new MDCTemporaryDrawer(appNav); 
+    const tempDrawer = this.element.querySelector('.mdc-temporary-drawer');
+    this.appDrawer = new MDCTemporaryDrawer(tempDrawer); 
+    
+    // Add Event Listeners
+    this.element.querySelector('.menu')
+    .addEventListener('click', () => this.toggleDrawer(true));
 
-    let menu = this.element.querySelector('.menu')
-    menu.addEventListener('click', () => this.toggleDrawer(true));
+    let simpleMenu = new MDCSimpleMenu(this.element.querySelector('.mdc-simple-menu'));
+    this.element.querySelector('.simpleMenu')
+    .addEventListener('click', () => simpleMenu.open = !simpleMenu.open);
   }
 
   toggleDrawer(bool){
@@ -35,14 +40,15 @@ export class AppNav {
 
   render() {
     
+    /*Route Links */
     const listItems:object = this.list.map((item: string) => {
       return (
         <stencil-route-link  
           id="link"
           router="#router" 
-          url={`/${ item == 'Home' ? '' : item.toLowerCase()}`} 
+          url={`/${ item == 'View1' ? '' : item.toLowerCase()}`} 
           onClick={() => this.toggleDrawer(false)}>
-          <i class="material-icons mdc-list-item__start-detail" aria-hidden="true"> {item.toLowerCase()}</i>{item}
+          <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">navigate_next</i>{item}
         </stencil-route-link>
       );
     });
@@ -54,7 +60,25 @@ export class AppNav {
           <div class="mdc-toolbar__row">
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
               <button class="menu material-icons mdc-toolbar__icon--menu">menu</button>
-              <span class="mdc-toolbar__title">MY APP</span>
+              <span class="mdc-toolbar__title">App Shell</span>
+            </section>
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+              
+              <button class="material-icons mdc-toolbar__icon" aria-label="Download">file_download</button>
+              <button class="material-icons mdc-toolbar__icon" aria-label="Print this page">print</button>
+ 
+              <div class="mdc-menu-anchor">
+                <button class="material-icons mdc-toolbar__icon simpleMenu" aria-label="Simple menu">more_vert</button>
+                <div class="mdc-simple-menu">
+                  <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                    <li class="mdc-list-item" role="menuitem" >Back</li>
+                    <li class="mdc-list-item" role="menuitem" >Forward</li>
+                    <li class="mdc-list-item" role="menuitem" >Reload</li>
+                    <li class="mdc-list-divider" role="separator"></li>
+                    <li class="mdc-list-item" role="menuitem">Save As...</li>
+                  </ul>
+                </div>
+              </div>
             </section>
           </div>
         </header>
@@ -64,12 +88,12 @@ export class AppNav {
             
             <header class="mdc-temporary-drawer__header">
               <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
-                Header here
+                Nav Header
               </div>
             </header>
 
             <nav class="mdc-temporary-drawer__content mdc-list-group">
-
+              
               <div class="mdc-list">
                {listItems}
               </div>
