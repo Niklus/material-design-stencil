@@ -29,7 +29,7 @@ To build the app for production, run:
 npm run build
 ```
 
-For the build to create a PWA in the dist folder you need to install the workbox cli
+For the build to create a service-worker in the dist folder you need to install the workbox cli
 
 ```bash
 npm install -g workbox-cli
