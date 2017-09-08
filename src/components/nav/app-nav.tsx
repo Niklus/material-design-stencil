@@ -18,7 +18,7 @@ export class AppNav {
   componentDidLoad(){
     
     // This styles need to be added dynamically since <a> tag is hidden in <stencil-rout-link/>
-    const links:any = this.element.querySelectorAll('#link a')
+    const links:any = this.element.querySelectorAll('.myLink a')
     links.forEach( link => link.classList.add("mdc-list-item"));
     
     // Initialise Temporary Drawer
@@ -44,7 +44,7 @@ export class AppNav {
     const listItems:object = this.list.map((item: string) => {
       return (
         <stencil-route-link  
-          id="link"
+          class="myLink"
           router="#router" 
           url={`/${ item == 'View1' ? '' : item.toLowerCase()}`} 
           onClick={() => this.toggleDrawer(false)}>

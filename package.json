@@ -1,16 +1,17 @@
 {
-  "name": "@stencil/starter",
+  "name": "material-design-stencil",
   "private": true,
   "version": "0.0.1",
-  "description": "Stencil Starter App",
+  "description": "Material Design Stencil Starter App",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "stencil build",
+    "build": "stencil build && gulp && workbox-cli generate:sw",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
     "serve": "stencil-dev-server",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "@stencil/core": "next",
@@ -19,16 +20,7 @@
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
-    "@stencil/utils": "latest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-starter.git"
-  },
-  "author": "Ionic Team",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ionic-team/stencil"
-  },
-  "homepage": "https://github.com/ionic-team/stencil"
+    "@stencil/utils": "latest",
+    "gulp": "^3.9.1"
+  }
 }
