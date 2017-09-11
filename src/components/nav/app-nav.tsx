@@ -11,9 +11,9 @@ export class AppNav {
 
   @Element() element: HTMLElement;
 
-  @Prop() list:Array<string> = ['View1','View2','View3'];
+  @Prop() list:Array<string> = ['View1','View2','View3']; 
 
-  appDrawer: {open: boolean}; // placeholder object to avoid type errors in toggledrawer method.
+  appDrawer: {open: boolean}; // placeholder 
   
   componentDidLoad(){
     
