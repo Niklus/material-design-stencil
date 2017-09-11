@@ -11,8 +11,8 @@ To start a new project using Stencil, clone this repo to a new directory:
 run:
 
 ```bash
-npm install
-npm start
+yarn
+yarn start
 ```
 
 To view the build, start an HTTP server inside of the `/www` directory.
@@ -26,7 +26,7 @@ npm run dev
 To build the app for production, run:
 
 ```bash
-npm run build
+yarn build
 ```
 
 For the build to create a service-worker in the dist folder you need to install the workbox cli
