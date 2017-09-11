@@ -5,7 +5,6 @@ www/index.html
 *~
 *.sw[mnpcod]
 *.log
-*.lock
 *.tmp
 *.tmp.*
 log.txt
