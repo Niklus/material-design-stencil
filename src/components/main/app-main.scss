@@ -1,10 +1,10 @@
 
 /*imports*/
-@import '../../libs/icons';
+@import '../../libs/icons'; // This file is large: use svg instead
 @import '../../libs/roboto';
 @import '../../../node_modules/material-components-web/dist/material-components-web';
 
-/*After Development CHECK if you reduce css file by specifying only the compoenets used 
+/*Reduce css file by specifying only the components used 
 as shown below
 @import '../../../node_modules/@material/card/dist/mdc.card';
 @import '../../../node_modules/@material/button/dist/mdc.button';
